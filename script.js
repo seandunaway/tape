@@ -13,17 +13,17 @@ function yf_url (yf_config) {
 	    "https://query1.finance.yahoo.com/v8/finance/chart/", yf_config.symbol,
 	    "?interval=", yf_config.interval,
 	    "&range=", yf_config.range,
-	]
-	return url.join("")
+	].join("")
+	return url
 }
 
-async function yf_fetch (yf_url) {
+async function yf_response (yf_url) {
     const response = await fetch(yf_url)
     return response
 }
 
-async function yf_json (yf_fetch) {
-	const json = await yf_fetch.json()
+async function yf_json (yf_response) {
+	const json = await yf_response.json()
     return json
 }
 
@@ -52,7 +52,7 @@ function yf_map (yf_result) {
 (async function main () {
     const config = yf_config({ symbol: "TSLA" })
     const url = yf_url(config)
-    const response = await yf_fetch(url)
+    const response = await yf_response(url)
     const json = await yf_json(response)
     const result = yf_result(json)
     const map = yf_map(result)
