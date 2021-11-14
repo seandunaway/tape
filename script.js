@@ -1,9 +1,9 @@
-function yf_config (defaults) {
+function yf_config (object) {
 	const config = {
 		symbol: "",
 		interval: "1d",
 		range: "10y",
-		...defaults,
+		...object,
 	}
     return config
 }
@@ -50,7 +50,7 @@ function yf_map (yf_result) {
 
 
 (async function main () {
-    const config = yf_config({ symbol: "TSLA" })
+    const config = yf_config({ symbol: "AAPL" })
     const url = yf_url(config)
     const response = await yf_response(url)
     const json = await yf_json(response)
