@@ -1,0 +1,10 @@
+body {
+    font-family: monospace;
+}
+
+td {
+    text-align: right;
+}
+td:first-child {
+    padding-right: 1em;
+}

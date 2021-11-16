@@ -2,7 +2,7 @@ function yf_config (object) {
 	const config = {
 		symbol: "",
 		interval: "1d",
-		range: "10y",
+		range: "1y",
 		...object,
 	}
     return config
@@ -48,6 +48,20 @@ function yf_map (yf_result) {
 	return map
 }
 
+// @todo: yf_map_format
+
+
+function date_format (date) {
+    const month = date.getMonth() + 1
+    const day = date.getDate()
+    const year = date.getFullYear()
+
+    const month_pad = month.toString().padStart(2, "0")
+    const day_pad = day.toString().padStart(2, "0")
+
+    return `${month_pad}/${day_pad}/${year}`
+}
+
 
 (async function main () {
     const config = yf_config({ symbol: "AAPL" })
@@ -57,5 +71,12 @@ function yf_map (yf_result) {
     const result = yf_result(json)
     const map = yf_map(result)
 
-    console.log(map)
+    const table = document.querySelector("#table tbody")
+    for (let i of map.entries()) {
+		const date = date_format(i[0])
+		const quote = i[1]
+        table.innerHTML += `<tr><td>${date}</td><td>${quote}</td></tr>\n`
+    }
+
+	console.log(map)
 })()
