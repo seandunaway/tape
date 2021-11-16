@@ -1,6 +1,6 @@
 function yf_config (object) {
 	const config = {
-		symbol: "",
+		// symbol: "",
 		interval: "1d",
 		range: "1y",
 		...object,
@@ -10,11 +10,12 @@ function yf_config (object) {
 
 function yf_url (yf_config) {
 	const url = [
-	    "https://query1.finance.yahoo.com/v8/finance/chart/", yf_config.symbol,
-	    "?interval=", yf_config.interval,
+	    "https://query1.finance.yahoo.com/v8/finance/chart/", yf_config.symbol, "?",
+	    "&interval=", yf_config.interval,
 	    "&range=", yf_config.range,
-	].join("")
-	return url
+	]
+	const url_join = url.join("")
+	return url_join
 }
 
 async function yf_response (yf_url) {
@@ -41,25 +42,32 @@ function yf_result (yf_json) {
 function yf_map (yf_result) {
 	let map = new Map()
     for (let i = 0; i < yf_result.length; i++) {
-		const key = new Date(yf_result.timestamp[i] * 1000)
-        const value = yf_result.quote[i].toFixed(yf_result.pricehint)
-		map.set(key, value)
+		const date = new Date(yf_result.timestamp[i] * 1000)
+		const quote = yf_result.quote[i]
+
+		const date_format = yf_map_date_format(date)
+		const quote_format = yf_map_quote_format(quote, yf_result.pricehint)
+
+		map.set(date_format, quote_format)
 	}
 	return map
 }
 
-// @todo: yf_map_format
+function yf_map_date_format (date) {
+	const month = date.getMonth() + 1
+	const day = date.getDate()
+	const year = date.getFullYear()
 
+	const month_format = month.toString().padStart(2, "0")
+	const day_format = day.toString().padStart(2, "0")
 
-function date_format (date) {
-    const month = date.getMonth() + 1
-    const day = date.getDate()
-    const year = date.getFullYear()
+	const date_format = `${month_format}/${day_format}/${year}`
+	return date_format
+}
 
-    const month_pad = month.toString().padStart(2, "0")
-    const day_pad = day.toString().padStart(2, "0")
-
-    return `${month_pad}/${day_pad}/${year}`
+function yf_map_quote_format (quote, yf_result_pricehint = 2) {
+	const quote_format = quote.toFixed(yf_result_pricehint)
+	return quote_format
 }
 
 
@@ -71,12 +79,13 @@ function date_format (date) {
     const result = yf_result(json)
     const map = yf_map(result)
 
-    const table = document.querySelector("#table tbody")
+	let table_data = ""
     for (let i of map.entries()) {
-		const date = date_format(i[0])
+		const date = i[0]
 		const quote = i[1]
-        table.innerHTML += `<tr><td>${date}</td><td>${quote}</td></tr>\n`
+		table_data += `<tr><td>${date}</td><td>${quote}</td></tr>\n`
     }
 
-	console.log(map)
+	const table = document.querySelector("table")
+	table.innerHTML = `<tbody>${table_data}</tbody>`
 })()
