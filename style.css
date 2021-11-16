@@ -8,3 +8,12 @@ td {
 td:first-child {
     padding-right: 1em;
 }
+
+#content {
+    column-count: 5;
+    height: 98vh;
+}
+
+#config {
+    display: none;
+}

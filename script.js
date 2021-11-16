@@ -2,7 +2,7 @@ function yf_config (object) {
 	const config = {
 		// symbol: "",
 		interval: "1d",
-		range: "1y",
+		range: "10y",
 		...object,
 	}
     return config
