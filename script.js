@@ -44,16 +44,12 @@ function yf_map (yf_result) {
     for (let i = 0; i < yf_result.length; i++) {
 		const date = new Date(yf_result.timestamp[i] * 1000)
 		const quote = yf_result.quote[i]
-
-		const date_format = yf_map_date_format(date)
-		const quote_format = yf_map_quote_format(quote, yf_result.pricehint)
-
-		map.set(date_format, quote_format)
+		map.set(date, quote)
 	}
 	return map
 }
 
-function yf_map_date_format (date) {
+function util_date_format (date) {
 	const month = date.getMonth() + 1
 	const day = date.getDate()
 	const year = date.getFullYear()
@@ -65,7 +61,7 @@ function yf_map_date_format (date) {
 	return date_format
 }
 
-function yf_map_quote_format (quote, yf_result_pricehint = 2) {
+function util_quote_format (quote, yf_result_pricehint = 2) {
 	const quote_format = quote.toFixed(yf_result_pricehint)
 	return quote_format
 }
@@ -83,7 +79,11 @@ function yf_map_quote_format (quote, yf_result_pricehint = 2) {
     for (let i of map.entries()) {
 		const date = i[0]
 		const quote = i[1]
-		table_data += `<tr><td>${date}</td><td>${quote}</td></tr>\n`
+
+		const date_format = util_date_format(date)
+		const quote_format = util_quote_format(quote, result.pricehint)
+
+		table_data += `<tr><td>${date_format}</td><td>${quote_format}</td></tr>\n`
     }
 
 	const table = document.querySelector("table")
