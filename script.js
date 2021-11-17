@@ -1,9 +1,12 @@
 function yf_config (object) {
-    if (!object.symbol) object.symbol = "ES=F"
-    const config = {
+    let config = {
+        symbol: "ES=F",
         interval: "1d",
         range: "10y",
-        ...object,
+    }
+    for (i in object) {
+        if (object.i)
+            config.i = object.i
     }
     return config
 }
@@ -96,7 +99,6 @@ window.onload = async function main () {
 
         table_data += `<tr><td>${date_format}</td><td>${quote_format}</td></tr>\n`
     }
-
     const table = document.querySelector("table")
     table.innerHTML = `<tbody>${table_data}</tbody>`
 }
