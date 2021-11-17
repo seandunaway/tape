@@ -1,5 +1,6 @@
 body {
     font-family: monospace;
+    font-size: 12px
 }
 
 td {
@@ -10,10 +11,13 @@ td:first-child {
 }
 
 #content {
-    column-count: 5;
+    column-width: 12em;
     height: 98vh;
 }
 
-#config {
-    display: none;
+@media print {
+    #content {
+        column-count: 4;
+        height: auto;
+    }
 }
