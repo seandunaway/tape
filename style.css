@@ -1,6 +1,7 @@
 body {
     font-family: monospace;
-    font-size: 12px
+    font-size: 12px;
+    overflow: hidden;
 }
 
 td {
@@ -12,7 +13,7 @@ td:first-child {
 
 #content {
     column-width: 12em;
-    height: 96vh;
+    height: 101vh;
     overflow-x: scroll;
 }
 
@@ -20,5 +21,6 @@ td:first-child {
     #content {
         column-count: 4;
         height: auto;
+        overflow: auto;
     }
 }
