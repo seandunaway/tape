@@ -31,10 +31,11 @@ async function yf_json (yf_response) {
 function yf_result (yf_json) {
 	const root = yf_json["chart"]["result"][0]
 	const result = {
-	    length: root["timestamp"].length,
+		symbol: root["meta"]["symbol"],
+		length: root["timestamp"].length,
 		timestamp: root["timestamp"],
-	    quote: root["indicators"]["quote"][0]["close"],
-	    pricehint: root["meta"]["priceHint"],
+		quote: root["indicators"]["quote"][0]["close"],
+		pricehint: root["meta"]["priceHint"],
 	}
 	return result
 }
@@ -77,6 +78,8 @@ async function main (symbol) {
     const json = await yf_json(response)
     const result = yf_result(json)
     const map = yf_map(result)
+
+	document.title = result.symbol
 
 	let table_data = ""
     for (let i of map.entries()) {
