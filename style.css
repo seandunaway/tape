@@ -13,6 +13,7 @@ td:first-child {
 #content {
     column-width: 12em;
     height: 98vh;
+    overflow-x: scroll;
 }
 
 @media print {

@@ -77,8 +77,16 @@ function util_quote_format (quote, yf_result_pricehint = 2) {
     return quote_format
 }
 
+function horizontal_scroll (selector) {
+    const element = document.querySelector(selector)
+    element.scrollLeft = element.scrollWidth
+    element.addEventListener("wheel", function (event) {
+        element.scrollLeft += event.deltaY < 0 ? -window.innerWidth : window.innerWidth
+    })
+}
 
-window.onload = async function main () {
+
+window.addEventListener("load", async function main () {
     const search = location.search.substring(1)
     const config = yf_config({ symbol: search })
     const url = yf_url(config)
@@ -101,4 +109,6 @@ window.onload = async function main () {
     }
     const table = document.querySelector("table")
     table.innerHTML = `<tbody>${table_data}</tbody>`
-}
+
+    horizontal_scroll("#content")
+})
