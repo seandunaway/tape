@@ -1,4 +1,5 @@
 @echo off
+mkdir "C:\tmp\chrome\"
 start "tape" /B "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" ^
 --disable-web-security ^
 --new-window ^
