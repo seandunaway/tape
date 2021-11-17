@@ -101,7 +101,7 @@ function horizontal_scroll (selector) {
 }
 
 
-window.addEventListener("load", async function main () {
+window.addEventListener("load", async function load () {
     const search = location.search.substring(1)
     const config = yf_config({ symbol: search })
     const url = yf_url(config)
