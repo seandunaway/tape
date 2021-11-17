@@ -12,7 +12,7 @@ td:first-child {
 
 #content {
     column-width: 12em;
-    height: 98vh;
+    height: 96vh;
     overflow-x: scroll;
 }
 
