@@ -29,6 +29,9 @@ async function yf_json (yf_response) {
 }
 
 function yf_result (yf_json) {
+	if (!yf_json["chart"]["result"])
+		return { symbol: yf_json["chart"]["error"]["code"], length: 0, }
+
 	const root = yf_json["chart"]["result"][0]
 	const result = {
 		symbol: root["meta"]["symbol"],
@@ -46,7 +49,8 @@ function yf_map (yf_result) {
 		const date = new Date(yf_result.timestamp[i] * 1000)
 		const quote = yf_result.quote[i]
 
-		if (!date || !quote) continue
+		if (!date || !quote)
+			continue
 
 		map.set(date, quote)
 	}
