@@ -55,9 +55,24 @@ function yf_map (yf_result) {
         if (!date || !quote)
             continue
 
-        map.set(date, quote)
+        const date_format = util_date_format(date)
+        const quote_format = util_quote_format(quote, yf_result.pricehint)
+
+        map.set(date_format, quote_format)
     }
     return map
+}
+
+function yf_table (yf_map) {
+    let table = "<table>"
+    for (let i of yf_map.entries()) {
+        const date = i[0]
+        const quote = i[1]
+
+        table += `<tr><td>${date}</td><td>${quote}</td></tr>`
+    }
+    table += "</table>"
+    return table
 }
 
 function util_date_format (date) {
@@ -94,21 +109,12 @@ window.addEventListener("load", async function main () {
     const json = await yf_json(response)
     const result = yf_result(json)
     const map = yf_map(result)
+    const table = yf_table(map)
 
     document.title = result.symbol
 
-    let table_data = ""
-    for (let i of map.entries()) {
-        const date = i[0]
-        const quote = i[1]
-
-        const date_format = util_date_format(date)
-        const quote_format = util_quote_format(quote, result.pricehint)
-
-        table_data += `<tr><td>${date_format}</td><td>${quote_format}</td></tr>\n`
-    }
-    const table = document.querySelector("table")
-    table.innerHTML = `<tbody>${table_data}</tbody>`
+    const content = document.querySelector("#content")
+    content.innerHTML = table
 
     horizontal_scroll("#content")
 })
