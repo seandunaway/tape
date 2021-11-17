@@ -44,6 +44,9 @@ function yf_map (yf_result) {
     for (let i = 0; i < yf_result.length; i++) {
 		const date = new Date(yf_result.timestamp[i] * 1000)
 		const quote = yf_result.quote[i]
+
+		if (!date || !quote) continue
+
 		map.set(date, quote)
 	}
 	return map
@@ -67,8 +70,8 @@ function util_quote_format (quote, yf_result_pricehint = 2) {
 }
 
 
-(async function main () {
-    const config = yf_config({ symbol: "AAPL" })
+async function main (symbol) {
+    const config = yf_config({ symbol: symbol })
     const url = yf_url(config)
     const response = await yf_response(url)
     const json = await yf_json(response)
@@ -88,4 +91,12 @@ function util_quote_format (quote, yf_result_pricehint = 2) {
 
 	const table = document.querySelector("table")
 	table.innerHTML = `<tbody>${table_data}</tbody>`
-})()
+}
+
+
+window.onload = function () {
+	const symbol = location.search
+	const symbol_fix = symbol.substring(1)
+
+	main(symbol_fix)
+}
