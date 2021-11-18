@@ -6,17 +6,17 @@ body {
     overflow: hidden;
 }
 
+#content {
+    column-width: 12em;
+    height: 101vh;
+    overflow-x: scroll;
+}
+
 td {
     text-align: right;
 }
 td:first-child {
     padding-right: 1em;
-}
-
-#content {
-    column-width: 12em;
-    height: 101vh;
-    overflow-x: scroll;
 }
 
 
