@@ -76,9 +76,9 @@ function yf_table (yf_map) {
 }
 
 function util_date_format (date) {
-    const month = date.getMonth() + 1
-    const day = date.getDate()
-    const year = date.getFullYear()
+    const month = date.getUTCMonth() + 1
+    const day = date.getUTCDate()
+    const year = date.getUTCFullYear()
 
     const month_pad = month.toString().padStart(2, "0")
     const day_pad = day.toString().padStart(2, "0")
