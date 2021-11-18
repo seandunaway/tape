@@ -28,6 +28,7 @@ td:first-child {
         font-size: 12px;
         overflow: auto;
     }
+
     #content {
         column-count: 4;
         height: auto;
