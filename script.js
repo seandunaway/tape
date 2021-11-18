@@ -5,8 +5,8 @@ function yf_config (object) {
         range: "10y",
     }
     for (i in object) {
-        if (object.i)
-            config.i = object.i
+        if (object[i])
+            config[i] = object[i]
     }
     return config
 }
