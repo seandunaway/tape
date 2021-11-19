@@ -19,14 +19,11 @@ td:first-child {
     padding-right: 1em;
 }
 
-
 @media print {
     body {
         background-color: white;
         color: black;
-        font-family: monospace;
         font-size: 12px;
-        overflow: auto;
     }
 
     #content {
