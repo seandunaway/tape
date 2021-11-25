@@ -51,12 +51,16 @@ function yf_map (yf_result) {
     for (let i = 0; i < yf_result.length; i++) {
         const date = new Date(yf_result.timestamp[i] * 1000)
         const quote = yf_result.quote[i]
-
         if (!date || !quote)
             continue
 
         const date_format = util_date_format(date)
         const quote_format = util_quote_format(quote, yf_result.pricehint)
+
+        const now = new Date()
+        const now_format = util_date_format(now)
+        if (date_format === now_format)
+            continue
 
         map.set(date_format, quote_format)
     }
