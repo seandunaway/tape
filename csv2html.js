@@ -32,8 +32,8 @@ function template (transform_result) {
 <!doctype html>
 <style>
 body {
-    font-family: monospace;
-    font-size: 10px;
+    font-family: Consolas, monospace;
+    font-size: 8px;
 }
 tr {
     line-height: 0.8em;
@@ -43,7 +43,7 @@ td:last-child {
 }
 @media print {
     #content {
-        column-count: 4;
+        column-count: 6;
     }
 }
 </style>
