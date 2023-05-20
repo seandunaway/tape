@@ -4,4 +4,5 @@
 --disable-web-security \
 --new-window \
 --user-data-dir=/tmp/tape \
-./index.html
+./index.html \
+&
