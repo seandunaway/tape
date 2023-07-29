@@ -4,7 +4,7 @@ function yf_config (object) {
         interval: "1d",
         range: "10y",
     }
-    for (i in object) {
+    for (let i in object) {
         if (object[i])
             config[i] = object[i]
     }
