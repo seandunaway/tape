@@ -8,7 +8,7 @@ body {
 
 #content {
     column-width: 12em;
-    height: 101vh;
+    height: 99vh;
     overflow-x: scroll;
 }
 
