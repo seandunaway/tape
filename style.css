@@ -23,11 +23,11 @@ td:first-child {
     body {
         background-color: white;
         color: black;
-        font-size: 12px;
+        font-size: 8px;
     }
 
     #content {
-        column-count: 4;
+        column-count: 6;
         height: auto;
         overflow: auto;
     }
