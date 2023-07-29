@@ -99,8 +99,15 @@ function util_quote_format (quote, yf_result_pricehint = 2) {
 function horizontal_scroll (selector) {
     const element = document.querySelector(selector)
     element.scrollLeft = element.scrollWidth
-    element.addEventListener("wheel", function (event) {
-        element.scrollLeft += event.deltaY < 0 ? -window.innerWidth : window.innerWidth
+    document.addEventListener("keydown", function (event) {
+        switch (event.key) {
+            case 'ArrowDown':
+                element.scrollLeft += window.innerWidth
+                break
+            case 'ArrowUp':
+                element.scrollLeft -= window.innerWidth
+                break
+        }
     })
 }
 
