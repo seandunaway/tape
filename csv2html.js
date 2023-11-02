@@ -32,14 +32,7 @@ function template (transform_result) {
 <!doctype html>
 <style>
 body {
-    font-family: Consolas, monospace;
     font-size: 8px;
-}
-tr {
-    line-height: 0.8em;
-}
-td:last-child {
-    padding-left: 1em;
 }
 @media print {
     #content {
@@ -47,11 +40,9 @@ td:last-child {
     }
 }
 </style>
-<div id="content">
-<table>
-${transform_result.map(i => `<tr><td>${i.date}</td><td>${i.time}</td><td>${i.quote}</td></tr>`).join("\n")}
-</table>
-</div>
+<pre id="content">
+${transform_result.map(i => `${i.date} ${i.time} ${i.quote}`).join("\n")}
+</pre>
 `
     return template
 }
