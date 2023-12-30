@@ -13,7 +13,7 @@ for (let line of input_lines) {
 
 	let fields = line.split(', ')
 	let date = fields[0]
-	let time = fields[1]
+	let time = fields[1].slice(0, 5)
 	let last = fields[5]
 
 	output_lines.push(`${date} ${time} ${last}`)
